@@ -1,6 +1,7 @@
-import {model, Schema, ObjectId} from "mongoose";
+import mongoose, {model, Schema, ObjectId} from "mongoose";
 import { email, string } from "zod";
 
+mongoose.connect("mongodb+srv://Haarush:2275@cluster0.lywyj.mongodb.net/BrainS")
 
 const UserSchema = new Schema({
     email: {type: string},
@@ -8,5 +9,13 @@ const UserSchema = new Schema({
     Password: {type:string}
 })
 
+const contentSchema = new Schema({
+    title: String,
+    link: String,
+    tags:{type: [mongoose.Types.ObjectId], ref: 'Tag'},
+    UserId:{type:mongoose.Types.ObjectId,unique:true, ref: 'users'}
+})
+
 
 export const UserModel = model("users",UserSchema)
+export const ContentModel = model("content",contentSchema)
