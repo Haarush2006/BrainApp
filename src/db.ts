@@ -1,7 +1,7 @@
 import mongoose, {model, Schema, ObjectId} from "mongoose";
 import { email, string } from "zod";
 
-mongoose.connect("mongodb+srv://Haarush:2275@cluster0.lywyj.mongodb.net/BrainS")
+mongoose.connect(process.env.DataBaseUrl!)
 
 const UserSchema = new Schema({
     email: {type: string},
