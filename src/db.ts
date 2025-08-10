@@ -1,5 +1,6 @@
 import mongoose, {model, Schema, ObjectId} from "mongoose";
 import { email, string } from "zod";
+import { required } from "zod/v4/core/util.cjs";
 
 mongoose.connect(process.env.DataBaseUrl!)
 
@@ -16,6 +17,17 @@ const contentSchema = new Schema({
     UserId:{type:mongoose.Types.ObjectId,unique:true, ref: 'users'}
 })
 
+const tagsSchema = new Schema({
+    title:{type: string, required: true}
+})
+
+const LinkSchema = new Schema({
+    hash: {type: string, unique: true},
+    UserId:{type:mongoose.Types.ObjectId,unique:true, ref: 'users'}
+    
+})
 
 export const UserModel = model("users",UserSchema)
 export const ContentModel = model("content",contentSchema)
+export const TagModel = model("tag",tagsSchema)
+export const LinkModel = model("link",LinkSchema)
